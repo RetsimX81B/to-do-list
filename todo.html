@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task..." class="newTask">
+        <button id="addTaskButton" class="addTaskButton">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+    
+    <script>
+    document.getElementById('addTaskButton').addEventListener('click', function() {
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value;
+
+        if (taskText) {
+            const li = document.createElement('li'); 
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'ui-check';
+            
+            li.appendChild(checkbox);
+            li.appendChild(document.createTextNode(taskText));
+
+            checkbox.addEventListener('click', function() {
+                li.classList.toggle('completed');
+            });
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = '🗑';
+            removeButton.className = 'removeButton';
+            removeButton.addEventListener('click', function() {
+                li.remove();
+            });
+
+            li.appendChild(removeButton);
+            document.getElementById('taskList').appendChild(li);
+            taskInput.value = '';
+        }
+    });
+    </script>
+</body>
+</html>
